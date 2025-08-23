@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3‑Week Study Checklist — Color Coded</title>
+  <style>
+    :root{
+      --bg:#0b1320; /* page background */
+      --card:#121a2a; /* card background */
+      --text:#eaf0ff; /* primary text */
+      --muted:#9fb0d0; /* secondary text */
+      --grid:#27324a; /* grid lines */
+      /* subject colors */
+      --ai:#4c8bf5;         /* AI */
+      --web:#2cc58d;        /* Web Design */
+      --de:#ff9f40;         /* German */
+      --ethics:#a78bfa;     /* Ethics */
+      --project:#f5c84c;    /* Project */
+      --reading:#2dd4bf;    /* Reading */
+      --exercise:#ef4444;   /* Exercise */
+      --journal:#94a3b8;    /* Journaling */
+      --accent:#22d3ee;     /* buttons/links */
+    }
+    * { box-sizing: border-box; }
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 800px at 20% 0%, #0f1b32 0%, var(--bg) 60%);
+      color:var(--text);
+    }
+    .wrap{ max-width:1100px; margin:40px auto; padding:20px; }
+    header{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; margin-bottom:18px; }
+    h1{ font-size: clamp(1.2rem, 2.8vw, 1.75rem); margin:0; letter-spacing:0.3px; }
+    .muted{ color:var(--muted); font-size:0.95rem; }.toolbar{ display:flex; gap:10px; align-items:center; }
+button, .linklike{
+  background: transparent; border:1px solid var(--accent); color: var(--text);
+  padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600; transition: all .2s ease;
+}
+button:hover, .linklike:hover{ background: rgba(34, 211, 238, .08); transform: translateY(-1px); }
+
+.card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+       border:1px solid rgba(255,255,255,0.08); border-radius:18px; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+       padding:16px; }
+
+.legend{ display:flex; flex-wrap:wrap; gap:10px; margin: 12px 0 18px; }
+.chip{ display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.02); }
+.dot{ width:14px; height:14px; border-radius:50%; box-shadow: 0 0 0 3px rgba(255,255,255,0.06) inset; }
+
+.table-wrap{ overflow:auto; border-radius:14px; border:1px solid rgba(255,255,255,0.08); }
+table{ width:100%; border-collapse:separate; border-spacing:0; min-width:840px; }
+thead th{
+  position:sticky; top:0; z-index:1;
+  background: #0e1a30; border-bottom:1px solid var(--grid); text-align:left; padding:12px 10px; font-size:0.95rem;
+}
+tbody td{ padding:10px; border-bottom:1px solid var(--grid); }
+tbody tr:hover{ background: rgba(255,255,255,0.02); }
+
+.day{ white-space:nowrap; font-weight:700; letter-spacing:0.2px; }
+
+.check{
+  --c: var(--accent);
+  appearance:none; width:22px; height:22px; border-radius:8px; border:2px solid var(--c);
+  display:inline-grid; place-content:center; cursor:pointer; background:transparent; transition:.2s ease;
+}
+.check:checked{ background: var(--c); }
+.check::before{ content:""; width:10px; height:10px; transform: scale(0); transition:.15s ease-in-out; background:white; clip-path: polygon(14% 53%, 0 66%, 40% 100%, 100% 22%, 84% 8%, 40% 66%); }
+.check:checked::before{ transform: scale(1); }
+
+.pill{ display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.3px; }
+.ai{ --c: var(--ai);} .web{--c:var(--web);} .de{--c:var(--de);} .eth{--c:var(--ethics);} .proj{--c:var(--project);} .read{--c:var(--reading);} .fit{--c:var(--exercise);} .jrnl{--c:var(--journal);} 
+.pill{ border:1px solid color-mix(in oklab, var(--c), white 20%); color: color-mix(in oklab, var(--c), white 10%); background: color-mix(in oklab, var(--c), black 85%); }
+
+.foot{ display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:12px; }
+.progress{ height:10px; background:#0f2038; border-radius:999px; width:100%; overflow:hidden; border:1px solid rgba(255,255,255,0.08); }
+.bar{ height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--ai)); border-radius:inherit; transition: width .3s ease; }
+
+@media print{
+  body{ background:white; color:black; }
+  .card, .table-wrap{ box-shadow:none; border-color:#ddd; }
+  button, .toolbar, .legend{ display:none !important; }
+  thead th{ background:#f8f8f8; }
+  .pill{ color:black; border-color:#888; background:#f2f2f2; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>3‑Week Study Checklist (Color‑Coded)</h1>
+        <div class="muted">Tick your daily tasks — your progress is saved automatically in this browser (localStorage).</div>
+      </div>
+      <div class="toolbar">
+        <button id="printBtn" title="Print or save as PDF">Print</button>
+        <button id="clearBtn" title="Clear all saved ticks">Clear All</button>
+      </div>
+    </header><div class="card">
+  <div class="legend">
+    <span class="chip"><span class="dot" style="background:var(--ai)"></span> AI</span>
+    <span class="chip"><span class="dot" style="background:var(--web)"></span> Web Design</span>
+    <span class="chip"><span class="dot" style="background:var(--de)"></span> German</span>
+    <span class="chip"><span class="dot" style="background:var(--ethics)"></span> Ethics</span>
+    <span class="chip"><span class="dot" style="background:var(--project)"></span> Project</span>
+    <span class="chip"><span class="dot" style="background:var(--reading)"></span> Reading</span>
+    <span class="chip"><span class="dot" style="background:var(--exercise)"></span> Exercise</span>
+    <span class="chip"><span class="dot" style="background:var(--journal)"></span> Journaling</span>
+  </div>
+
+  <div class="table-wrap">
+    <table id="checkTable" role="grid" aria-label="Study checklist table">
+      <thead>
+        <tr>
+          <th class="day">Day</th>
+          <th><span class="pill ai">AI</span></th>
+          <th><span class="pill web">Web</span></th>
+          <th><span class="pill de">German</span></th>
+          <th><span class="pill eth">Ethics</span></th>
+          <th><span class="pill proj">Project</span></th>
+          <th><span class="pill read">Reading</span></th>
+          <th><span class="pill fit">Exercise</span></th>
+          <th><span class="pill jrnl">Journal</span></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="foot">
+    <span class="muted">Overall progress</span>
+    <div class="progress"><div id="progressBar" class="bar"></div></div>
+  </div>
+</div>
+
+  </div>  <script>
+    const SUBJECTS = ["ai","web","de","eth","proj","read","fit","jrnl"]; // order matches columns
+    const TOTAL_DAYS = 21;
+    const KEY = "studyChecklist_v1"; // localStorage key
+
+    const state = loadState();
+
+    function loadState(){
+      try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch{ return {}; }
+    }
+    function saveState(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+
+    function cellKey(day, sub){ return `d${day}_${sub}`; }
+
+    function buildTable(){
+      const tbody = document.querySelector('#checkTable tbody');
+      for(let day=1; day<=TOTAL_DAYS; day++){
+        const tr = document.createElement('tr');
+        const tdDay = document.createElement('td');
+        tdDay.className = 'day';
+        tdDay.textContent = `Day ${day}`;
+        tr.appendChild(tdDay);
+
+        SUBJECTS.forEach((sub, idx)=>{
+          const td = document.createElement('td');
+          const input = document.createElement('input');
+          input.type = 'checkbox';
+          input.className = 'check';
+          // set subject color
+          const colorMap = { ai:'var(--ai)', web:'var(--web)', de:'var(--de)', eth:'var(--ethics)', proj:'var(--project)', read:'var(--reading)', fit:'var(--exercise)', jrnl:'var(--journal)' };
+          input.style.setProperty('--c', colorMap[sub]);
+
+          const k = cellKey(day, sub);
+          input.checked = !!state[k];
+          input.addEventListener('change', () =>{
+            state[k] = input.checked;
+            saveState();
+            updateProgress();
+          });
+          td.appendChild(input);
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      }
+    }
+
+    function updateProgress(){
+      const total = TOTAL_DAYS * SUBJECTS.length;
+      let done = 0;
+      for(let day=1; day<=TOTAL_DAYS; day++){
+        for(const sub of SUBJECTS){ if(state[cellKey(day, sub)]) done++; }
+      }
+      const pct = total ? Math.round((done/total)*100) : 0;
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressBar').setAttribute('aria-valuenow', pct);
+      document.getElementById('progressBar').title = pct + '% complete';
+    }
+
+    function clearAll(){
+      if(confirm('Clear all ticks?')){
+        for(let day=1; day<=TOTAL_DAYS; day++){
+          for(const sub of SUBJECTS){ delete state[cellKey(day, sub)]; }
+        }
+        saveState();
+        document.querySelectorAll('.check').forEach(ch=> ch.checked = false);
+        updateProgress();
+      }
+    }
+
+    document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+    document.getElementById('clearBtn').addEventListener('click', clearAll);
+
+    buildTable();
+    updateProgress();
+  </script></body>
+</html>
